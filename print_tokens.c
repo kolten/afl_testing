@@ -17,7 +17,7 @@ static token error_or_eof_case();
 static int check_delimiter();
 static int keyword(int state);
 static int special(int state);
-static skip(character_stream stream_ptr);
+static void skip(character_stream stream_ptr);
 static int constant(int state,char token_str[],int token_ind);
 static int next_state();
 static get_actual_token(char token_str[],int token_ind);
@@ -400,7 +400,7 @@ int state;
                    end_of_character_stream.                   
  * ******************************************************************* */
 
-static skip(stream_ptr)
+static void skip(stream_ptr)
 character_stream stream_ptr;
 {
         char c;
