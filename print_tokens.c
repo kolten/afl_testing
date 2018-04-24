@@ -181,7 +181,8 @@ string FILENAME;
 token get_token(tstream_ptr)
 token_stream tstream_ptr;
 {
-      char token_str[80]; /* This buffer stores the current token */
+      char *token_str; /* This buffer stores the current token */
+      token_str = malloc(sizeof(tstream_ptr));
       int token_ind;      /* Index to the token_str  */
       token token_ptr;
       CHARACTER ch;
@@ -206,7 +207,7 @@ token_stream tstream_ptr;
 	      unget_char(ch,tstream_ptr->ch_stream);
 	      token_ind--;
 	      get_actual_token(token_str,token_ind);
-	      strcpy(token_ptr->token_string,token_str);
+	      strncpy(token_ptr->token_string,token_str);
 	      return(token_ptr);
 	  } 
 	    
@@ -240,7 +241,7 @@ token_stream tstream_ptr;
                  case 27 : /* These are constant cases */
                  case 29 : token_ptr->token_id=constant(next_st,token_str,token_ind);
                            get_actual_token(token_str,token_ind);
-                           strcpy(token_ptr->token_string,token_str);
+                           strncpy(token_ptr->token_string,token_str);
                            return(token_ptr);
                  case 30 :  /* This is COMMENT case */
                            skip(tstream_ptr->ch_stream);
@@ -277,14 +278,14 @@ int token_ind;
             unget_char(ch,tstream_ptr->ch_stream);
             token_ind--;
             get_actual_token(token_str,token_ind);
-            strcpy(token_ptr->token_string,token_str);
+            strncpy(token_ptr->token_string,token_str);
             return(token_ptr);
         }
         token_ptr->token_id=NUMERIC; /* Numeric case */
         unget_char(ch,tstream_ptr->ch_stream);
         token_ind--;
         get_actual_token(token_str,token_ind);
-        strcpy(token_ptr->token_string,token_str);
+        strncpy(token_ptr->token_string,token_str);
         return(token_ptr);
 }
 
@@ -317,7 +318,7 @@ char token_str[],ch;
       }
       token_ptr->token_id=ERROR;
       get_actual_token(token_str,token_ind);
-      strcpy(token_ptr->token_string,token_str);
+      strncpy(token_ptr->token_string,token_str);
       return(token_ptr);                
 }
 
