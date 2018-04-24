@@ -10,6 +10,7 @@ typedef int BOOLEAN;
 typedef char *string;
 
 # include <stdio.h>
+# include <stdlib.h>
 # include "tokens.h"
 
 static token numeric_case();
@@ -20,7 +21,7 @@ static int special(int state);
 static void skip(character_stream stream_ptr);
 static int constant(int state,char token_str[],int token_ind);
 static int next_state();
-static get_actual_token(char token_str[],int token_ind);
+static void get_actual_token(char token_str[],int token_ind);
 
 main(argc,argv)
 int argc;
