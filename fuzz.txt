@@ -1,0 +1,26 @@
+AFL: http://lcamtuf.coredump.cx/afl/
+Download: http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz
+QuickStartGuide: http://lcamtuf.coredump.cx/afl/QuickStartGuide.txt
+
+It would be much easier if you run the AFL fuzzer on a Linux machine where you have sudo access. 
+If you don't have a Linux machine, you can always install a virtual machine on your local computer, or on a cloud machine such as Amazon Web Service. 
+
+Note: Mac IOS used C compiler "clang", therefore requires AFL-clang in the AFL package to instrument the source code. It may not be work properly.  
+
+There's a total of 2 simple security security vulnerabilitis. 
+
+Step: 
+1. Download AFL fuzzer and unzip/untar it. 
+2. Run "make && make install" in the afl directory. 
+3. Compile the "print_tokens.c" file with the "afl-gcc" using command "./afl-gcc ./print_tokens.c -o ./print_tokens"(Of course, if they are all in the same folder, modify accordingly based on your files' location)
+4. Create a "testcases" folder, a "results" folder, and a simple test case file "test1.txt" in the "testcases" folder. 
+   Within "test1.txt", put some simple input the print_token.c program takes, the afl fuzzer will start fuzzing base on the initial input that you provided. 
+5. Run command "./afl-fuzz -i ./testcases/ -o ./results/ ./print_tokens" 
+6. Let it run for a while until it detects some inputs that crash/hang the program. AFL will fuzz until you stop it, otherwise, it will fuzz forever.
+7. In the "./results/crashes/" folder, AFL will store the crashing/hanging input in there, compile the program with "gcc", the normal C compiler.
+   Use the crashing/hanging inputs to reproduce the failure and debug to find the fault, and fix the fault. 
+   Try to re-run the code you modified with AFL and see if you actually fixed all the faults. You may have to fix the first fault that you find in order to detect the second fault. 
+
+Deliverables: 
+1. The "./results/" folder, zip it and submit it. 
+2. Submit "Fault & Fix.txt", include the line number where the fault exists, and what your change is going to be. Keep it short and simple.
