@@ -24,3 +24,5 @@ Step:
 Deliverables: 
 1. The "./results/" folder, zip it and submit it. 
 2. Submit "Fault & Fix.txt", include the line number where the fault exists, and what your change is going to be. Keep it short and simple.
+
+https://gist.githubusercontent.com/StevenClontz/4445774/raw/1722a289b665d940495645a5eaaad4da8e3ad4c7/mobydick.txt
