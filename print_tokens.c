@@ -207,7 +207,7 @@ token_stream tstream_ptr;
 	      unget_char(ch,tstream_ptr->ch_stream);
 	      token_ind--;
 	      get_actual_token(token_str,token_ind);
-	      strncpy(token_ptr->token_string,token_str);
+	      strncpy(token_ptr->token_string,token_str, sizeof(token_ptr->token_string));
 	      return(token_ptr);
 	  } 
 	    
@@ -241,7 +241,7 @@ token_stream tstream_ptr;
                  case 27 : /* These are constant cases */
                  case 29 : token_ptr->token_id=constant(next_st,token_str,token_ind);
                            get_actual_token(token_str,token_ind);
-                           strncpy(token_ptr->token_string,token_str);
+                           strncpy(token_ptr->token_string,token_str, sizeof(token_ptr->token_string));
                            return(token_ptr);
                  case 30 :  /* This is COMMENT case */
                            skip(tstream_ptr->ch_stream);
@@ -278,14 +278,14 @@ int token_ind;
             unget_char(ch,tstream_ptr->ch_stream);
             token_ind--;
             get_actual_token(token_str,token_ind);
-            strncpy(token_ptr->token_string,token_str);
+            strncpy(token_ptr->token_string,token_str, sizeof(token_ptr->token_string));
             return(token_ptr);
         }
         token_ptr->token_id=NUMERIC; /* Numeric case */
         unget_char(ch,tstream_ptr->ch_stream);
         token_ind--;
         get_actual_token(token_str,token_ind);
-        strncpy(token_ptr->token_string,token_str);
+        strncpy(token_ptr->token_string,token_str, sizeof(token_ptr->token_string));
         return(token_ptr);
 }
 
@@ -318,7 +318,7 @@ char token_str[],ch;
       }
       token_ptr->token_id=ERROR;
       get_actual_token(token_str,token_ind);
-      strncpy(token_ptr->token_string,token_str);
+      strncpy(token_ptr->token_string,token_str, sizeof(token_ptr->token_string));
       return(token_ptr);                
 }
 
