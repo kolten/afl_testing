@@ -24,7 +24,7 @@ static int constant(int state,char token_str[],int token_ind);
 static int next_state();
 static void get_actual_token(char token_str[],int token_ind);
 
-main(argc,argv)
+int main(argc,argv)
 int argc;
 char *argv[];
 {
@@ -41,7 +41,8 @@ char *argv[];
       while(!is_eof_token((token_ptr=get_token(stream_ptr))))
                 print_token(token_ptr);
       print_token(token_ptr);
-  exit(0);
+  //exit(0);
+    return 0;
 }
 
 
@@ -91,7 +92,9 @@ string FILENAME;
 CHARACTER get_char(stream_ptr)
 character_stream stream_ptr;
 {
-      if(stream_ptr->stream[stream_ptr->stream_ind] == '\0')
+      
+     memset(&stream_ptr->stream, '\0', sizeof(stream_ptr->stream));
+     if(stream_ptr->stream[stream_ptr->stream_ind] == '\0')
       {
               if(fgets(stream_ptr->stream+START,80-START,stream_ptr->fp) == NULL)/* Fix bug: add -START - hf*/
                     stream_ptr->stream[START]=EOF;
@@ -138,7 +141,7 @@ character_stream stream_ptr;
           return;
       else
           stream_ptr->stream[--(stream_ptr->stream_ind)]=ch;
-      return;
+      //return;
 }
 
 
@@ -555,5 +558,5 @@ char token_str[];
           for(start=0;ind<=token_ind;++start,++ind) /* Delete the leading
                                                        white spaces. */
                 token_str[start]=token_str[ind];
-          return;
+          // return;
 }

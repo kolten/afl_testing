@@ -1,0 +1,5 @@
+Faults & Fixes
+Lines 214, 248, 285, 292, 325, I changed strcpy to strncopy, 
+and set the sizeof argument to the token_string within the token_ptr struct
+
+Lines 94 in get_char(), above it, added memset() before the conditional to set the stream_pointer char array to NULL initally
